@@ -5,3 +5,7 @@ export interface IPost extends Document {
     content: string;
     user: mongoose.Types.ObjectId;
 }
+export interface IUser extends Document {
+    username: string;
+    email: string;
+}

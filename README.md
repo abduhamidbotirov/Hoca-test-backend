@@ -1,4 +1,4 @@
-# Job apply
+<!-- # Job apply
 ## Project Name and Description: Job Apply - Convenient Job Search Tool for Job Seekers
 ### This project is created to alleviate the difficulties of job searching for job seekers. It provides additional support for job seekers who are struggling to find suitable jobs.
 ## Project Objective:
@@ -31,4 +31,4 @@ MONGODB_URI= YOUR MONGODB_URL
 ## Project Status:
 ### The project is actively being worked on, with monthly updates and new features added. If you have any additional ideas regarding our project, feel free to share them on <a href="https://t.me/AbduhamidBotirov">Abduhamid Botirov</a>.
 ## Acknowledgments:
-### If you contribute to the project, we will provide both A and B support in return.
+### If you contribute to the project, we will provide both A and B support in return. -->

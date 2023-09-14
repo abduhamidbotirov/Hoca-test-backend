@@ -60,6 +60,18 @@ class PostController {
             }
         });
     }
+    getPurchasedPosts(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const purchasedPosts = yield PostModel.find({ transactionId: { $exists: true } });
+                res.status(200).json({ success: true, data: purchasedPosts });
+            }
+            catch (error) {
+                console.error(error.message);
+                return res.status(500).json({ message: error.message, status: 500 });
+            }
+        });
+    }
     getPosts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

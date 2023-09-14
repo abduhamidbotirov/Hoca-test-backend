@@ -50,6 +50,15 @@ class PostController {
             return res.status(500).json({ message: error.message, status: 500 });
         }
     }
+    async getPurchasedPosts(req: Request, res: Response) {
+        try {
+            const purchasedPosts = await PostModel.find({ transactionId: { $exists: true } });
+            res.status(200).json({ success: true, data: purchasedPosts });
+        } catch (error: any) {
+            console.error(error.message);
+            return res.status(500).json({ message: error.message, status: 500 });
+        }
+    }
     async getPosts(req: Request, res: Response) {
         try {
             const posts = await PostModel.find().populate({
@@ -223,6 +232,7 @@ class PostController {
             return res.status(500).json({ message: error.message, status: 500 });
         }
     }
+
 }
 
 export default PostController;

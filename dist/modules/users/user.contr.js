@@ -51,15 +51,26 @@ class UserController {
     createAdmin(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { email } = req.body;
-                const username = chance.word();
-                const user = new UserModel({ username, email });
-                yield user.save();
-                let token = JWT.SIGN({ id: user._id, role: "admin" });
+                const { email, password } = req.body;
+                if (!email || !password) {
+                    res.send({
+                        success: false,
+                        message: "email and password required"
+                    });
+                }
+                const isAdmin = yield UserModel.findOne({ email, password });
+                if (!isAdmin) {
+                    res.send({
+                        success: false,
+                        message: "admin not found"
+                    });
+                }
+                let token = JWT.SIGN({ id: isAdmin === null || isAdmin === void 0 ? void 0 : isAdmin._id, role: "admin" });
                 res.status(201).send({
                     success: true,
                     token,
-                    data: user
+                    role: "admin",
+                    data: isAdmin
                 });
             }
             catch (error) {

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import UserModel from './user.schema.js'; // userModel nomini faylni joyini o'zgartiring
 import Chance from 'chance'; // Chance kutubxonasini o'rnating
 import { JWT } from '../../utils/jwt.js';
+import { IUser } from '../../interface/interface.js';
 const chance = new Chance();
 class UserController {
     // Ma'lumotlarni olish 
@@ -36,15 +37,26 @@ class UserController {
     }
     async createAdmin(req: Request, res: Response) {
         try {
-            const { email } = req.body;
-            const username = chance.word();
-            const user = new UserModel({ username, email });
-            await user.save();
-            let token = JWT.SIGN({ id: user._id, role: "admin" } as Object);
+            const { email, password } = req.body;
+            if (!email || !password) {
+                res.send({
+                    success: false,
+                    message: "email and password required"
+                })
+            }
+            const isAdmin = await UserModel.findOne({ email, password });
+            if (!isAdmin) {
+                res.send({
+                    success: false,
+                    message: "admin not found"
+                })
+            }
+            let token = JWT.SIGN({ id: isAdmin?._id, role: "admin" } as Object);
             res.status(201).send({
                 success: true,
                 token,
-                data: user
+                role: "admin",
+                data: isAdmin
             });
         } catch (error: any) {
             console.error(error.message);

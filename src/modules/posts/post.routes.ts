@@ -2,13 +2,10 @@ import express from 'express';
 import PostController from './post.contr.js';
 import authMiddleware from '../../middleware/auth.js';
 import adminaCheck from '../../middleware/adminCheck.js';
-
 const postRouter = express.Router();
 const controller = new PostController();
-
 // CREATE POST
 postRouter.post('/', adminaCheck, controller.createPost);
-
 // GET ALL POSTS
 postRouter.get('/', controller.getPosts);
 postRouter.get('/bought', authMiddleware, controller.getMyPosts);

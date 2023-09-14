@@ -8,6 +8,7 @@ export interface IPost extends Document {
 export interface IUser extends Document {
     username: string;
     email: string;
+    password?:string
 }
 export interface IPost extends Document {
     imgLink: string;

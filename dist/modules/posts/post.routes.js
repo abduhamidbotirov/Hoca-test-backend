@@ -17,6 +17,5 @@ postRouter.patch('/like/:id', authMiddleware, controller.likePost);
 postRouter.patch('/dislike/:id', authMiddleware, controller.dislikePost);
 // UPDATE POST
 postRouter.put('/:id', adminaCheck, controller.updatePost);
-// DELETE POST
 postRouter.delete('/:id', adminaCheck, controller.deletePost);
 export default postRouter;

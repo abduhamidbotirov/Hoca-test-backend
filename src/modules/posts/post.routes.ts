@@ -16,14 +16,10 @@ postRouter.get('/sale/posts', adminaCheck, controller.getPurchasedPosts);
 postRouter.get('/:id', controller.getPostId);
 // LIKE POST
 postRouter.patch('/like/:id', authMiddleware, controller.likePost);
-
 // DISLIKE POST
 postRouter.patch('/dislike/:id', authMiddleware, controller.dislikePost);
-
 // UPDATE POST
 postRouter.put('/:id', adminaCheck, controller.updatePost);
-
-// DELETE POST
 postRouter.delete('/:id', adminaCheck, controller.deletePost);
 
 export default postRouter;

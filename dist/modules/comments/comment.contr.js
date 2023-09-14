@@ -31,7 +31,7 @@ class CommentController {
                 yield (pushComment === null || pushComment === void 0 ? void 0 : pushComment.save());
                 res.status(201).send({
                     success: true,
-                    data: comment.populate('user')
+                    data: comment
                 });
             }
             catch (error) {

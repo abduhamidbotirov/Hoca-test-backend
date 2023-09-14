@@ -23,7 +23,7 @@ class CommentController {
             await pushComment?.save();
             res.status(201).send({
                 success: true,
-                data: comment.populate('user')
+                data:  comment
             });
         } catch (error: any) {
             console.error(error.message);

@@ -63,7 +63,7 @@ class PostController {
     getPurchasedPosts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const purchasedPosts = yield PostModel.find({ transactionId: { $exists: true } });
+                const purchasedPosts = yield PostModel.find({ transactionId: { $exists: true } }).populate("userId");
                 res.status(200).json({ success: true, data: purchasedPosts });
             }
             catch (error) {
@@ -80,7 +80,7 @@ class PostController {
                     populate: {
                         path: "user",
                     }
-                });
+                }).populate("userId");
                 res.status(201).send({
                     success: true,
                     data: posts

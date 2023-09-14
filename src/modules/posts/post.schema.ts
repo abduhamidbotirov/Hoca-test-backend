@@ -25,6 +25,7 @@ const postSchema = new Schema<IPost>(
         },
         userId: { // Xaridor identifikatori
             type: String,
+            ref:"User"
         },
         comments: [
             {

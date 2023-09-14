@@ -22,6 +22,7 @@ const postSchema = new Schema({
     },
     userId: {
         type: String,
+        ref: "User"
     },
     comments: [
         {

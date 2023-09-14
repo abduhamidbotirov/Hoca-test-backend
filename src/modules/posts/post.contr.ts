@@ -52,7 +52,7 @@ class PostController {
     }
     async getPurchasedPosts(req: Request, res: Response) {
         try {
-            const purchasedPosts = await PostModel.find({ transactionId: { $exists: true } });
+            const purchasedPosts = await PostModel.find({ transactionId: { $exists: true } }).populate("userId");
             res.status(200).json({ success: true, data: purchasedPosts });
         } catch (error: any) {
             console.error(error.message);
@@ -66,7 +66,7 @@ class PostController {
                 populate: {
                     path: "user",
                 }
-            });
+            }).populate("userId");
             res.status(201).send({
                 success: true,
                 data: posts

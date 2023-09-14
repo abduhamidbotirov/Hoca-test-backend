@@ -1,8 +1,6 @@
 import "../db/mongo.js";
-// import "../db/db.js"
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-import path from "path";
 import indexRouter from "../modules/index.routes.js";
 import errorMiddleware from "../middleware/errorHandler.js";
 import fileUpload from "express-fileupload";

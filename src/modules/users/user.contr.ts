@@ -2,14 +2,16 @@ import { Request, Response } from 'express';
 import UserModel from './user.schema.js'; // userModel nomini faylni joyini o'zgartiring
 import Chance from 'chance'; // Chance kutubxonasini o'rnating
 import { JWT } from '../../utils/jwt.js';
-
 const chance = new Chance();
 class UserController {
     // Ma'lumotlarni olish 
     async getUsers(req: Request, res: Response) {
         try {
             const users = await UserModel.find();
-            res.json(users);
+            res.status(201).send({
+                success: true,
+                data: users
+            });
         } catch (error: any) {
             console.error(error.message);
             return res.status(500).json({ message: error.message, status: 500 });

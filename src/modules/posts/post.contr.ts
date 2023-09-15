@@ -176,8 +176,21 @@ class PostController {
             // Faylni tekshirish
             const { id } = req.params;
             const { title, desc, price } = req.body;
+            const oldPost = await PostModel.findById(id);
+            if (!oldPost) {
+                return res.status(404).json({ error: 'Post topilmadi' });
+
+            }
             if (!req.files || !req.files.file) {
-                const updatedPost = await PostModel.findByIdAndUpdate(id, { title, desc, price }, { new: true });
+
+                const updatedPost = await PostModel.findByIdAndUpdate(id,
+                    {
+                        title: title ? title : oldPost.title,
+                        desc: desc ? desc : oldPost.desc,
+                        price: price ? price : oldPost.price,
+                        imgLink: oldPost.imgLink,
+                    },
+                    { new: true });
                 if (!updatedPost) {
                     return res.status(404).json({ error: 'Post topilmadi' });
                 }
@@ -201,7 +214,14 @@ class PostController {
                 // Uploading the image to Cloudinary
                 const imgLink = await uploader(fileType.data, unique_image_name);
 
-                const updatedPost = await PostModel.findByIdAndUpdate(id, { imgLink, title, desc, price }, { new: true });
+                const updatedPost = await PostModel.findByIdAndUpdate(id,
+                    {
+                        title: title ? title : oldPost.title,
+                        desc: desc ? desc : oldPost.desc,
+                        price: price ? price : oldPost.price,
+                        imgLink
+                    },
+                     { new: true });
                 if (!updatedPost) {
                     return res.status(404).json({ error: 'Post topilmadi' });
                 }
